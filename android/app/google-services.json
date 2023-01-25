@@ -1,0 +1,274 @@
+{
+  "project_info": {
+    "project_number": "989107885332",
+    "project_id": "softcoder-b9e7f",
+    "storage_bucket": "softcoder-b9e7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989107885332:android:85891a29ced76faa871e01",
+        "android_client_info": {
+          "package_name": "com.scr.bitcoincircuitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989107885332-pi5fv524toi312if1ac7i4t3ncll24hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scr.bitcoincircuitapp",
+            "certificate_hash": "1e7370aed34cd0947c7ea9710635ae910e87eed7"
+          }
+        },
+        {
+          "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzS84sVcKejY8B-WQXO1ywNPh5eMHMKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989107885332-3sbvp3kh11guu2srj9s7vve8educa4e4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shs.immediateconnectapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989107885332:android:fb2c88e0fcb4af1c871e01",
+        "android_client_info": {
+          "package_name": "com.scr.bitcoinsuperstarapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989107885332-f76civ5md95j04f06fne7s0vs41dpnu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scr.bitcoinsuperstarapp",
+            "certificate_hash": "1e7370aed34cd0947c7ea9710635ae910e87eed7"
+          }
+        },
+        {
+          "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzS84sVcKejY8B-WQXO1ywNPh5eMHMKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989107885332-3sbvp3kh11guu2srj9s7vve8educa4e4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shs.immediateconnectapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989107885332:android:cddb8e8c55640711871e01",
+        "android_client_info": {
+          "package_name": "com.scr.immediatebitcoinapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989107885332-4hvieb45mvlqvt611hkh7oltoj29ng0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scr.immediatebitcoinapp",
+            "certificate_hash": "e4ee0f2c9851423429c5f2af71f1ca324cbb74dc"
+          }
+        },
+        {
+          "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzS84sVcKejY8B-WQXO1ywNPh5eMHMKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989107885332-3sbvp3kh11guu2srj9s7vve8educa4e4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shs.immediateconnectapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989107885332:android:2a352fc34a3188cb871e01",
+        "android_client_info": {
+          "package_name": "com.shs.bitcoincodeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989107885332-cjm575pcghlrb5clqoto5g62fql4qsd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shs.bitcoincodeapp",
+            "certificate_hash": "1e7370aed34cd0947c7ea9710635ae910e87eed7"
+          }
+        },
+        {
+          "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzS84sVcKejY8B-WQXO1ywNPh5eMHMKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989107885332-3sbvp3kh11guu2srj9s7vve8educa4e4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shs.immediateconnectapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989107885332:android:ab919a788d13c0b8871e01",
+        "android_client_info": {
+          "package_name": "com.shs.bitcoinfutureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989107885332-uiql1unvl0rb78rimt63gs31gor6njnp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shs.bitcoinfutureapp",
+            "certificate_hash": "48039870f841ac3e29bee980422b413ec6c0ba08"
+          }
+        },
+        {
+          "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzS84sVcKejY8B-WQXO1ywNPh5eMHMKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989107885332-3sbvp3kh11guu2srj9s7vve8educa4e4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shs.immediateconnectapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989107885332:android:402a79f314407f79871e01",
+        "android_client_info": {
+          "package_name": "com.shs.immediateconnectapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989107885332-gle013c6eimmg5f5h8pesm2neqjdi1hs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shs.immediateconnectapp",
+            "certificate_hash": "1e7370aed34cd0947c7ea9710635ae910e87eed7"
+          }
+        },
+        {
+          "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzS84sVcKejY8B-WQXO1ywNPh5eMHMKDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989107885332-2u3r2hqi8k1pbh4n74e9kfp6e6smqi47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "989107885332-3sbvp3kh11guu2srj9s7vve8educa4e4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shs.immediateconnectapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'coins_page.dart';
+import 'dashboard_home.dart';
+import 'localization/app_localization.dart';
 import 'portfolio_page.dart';
 import 'top_coin.dart';
+import 'translation.dart';
 import 'trendsPage.dart';
 
 class NavBar extends StatelessWidget {
@@ -36,19 +39,19 @@ class NavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CoinsPage()),
+                      MaterialPageRoute(builder: (context) => const DashboardPage()),
                     );
                   }, // Image tapped
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Image.asset("assets/image/homepage.png"),
-                        Spacer(),
-                        Text("Home",textAlign: TextAlign.start,
+                        const Spacer(),
+                        Text(AppLocalizations.of(context).translate('home'),textAlign: TextAlign.start,
                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                   ),
@@ -63,19 +66,19 @@ class NavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TopGainer()),
+                      MaterialPageRoute(builder: (context) => const TopGainer()),
                     );
                   }, // Image tapped
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Image.asset("assets/image/up-arrow.png"),
-                        Spacer(),
-                        Text("Top Coins",textAlign: TextAlign.start,
+                        const Spacer(),
+                        Text(AppLocalizations.of(context).translate('top_coin'),textAlign: TextAlign.start,
                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                   ),
@@ -90,19 +93,19 @@ class NavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PortfolioPage()),
+                      MaterialPageRoute(builder: (context) => const PortfolioPage()),
                     );
                   }, // Image tapped
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Image.asset("assets/image/Shape.png"),
-                        Spacer(),
-                        Text("Portfolio",textAlign: TextAlign.start,
+                        const Spacer(),
+                        Text(AppLocalizations.of(context).translate('portfolio'),textAlign: TextAlign.start,
                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                   ),
@@ -117,19 +120,19 @@ class NavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CoinsPage()),
+                      MaterialPageRoute(builder: (context) => const CoinsPage()),
                     );
                   }, // Image tapped
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Image.asset("assets/image/Icon.png"),
-                        Spacer(),
-                        Text("Coins",textAlign: TextAlign.start,
+                        const Spacer(),
+                        Text(AppLocalizations.of(context).translate('coins'),textAlign: TextAlign.start,
                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                   ),
@@ -148,15 +151,46 @@ class NavBar extends StatelessWidget {
                     );
                   }, // Image tapped
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Image.asset("assets/image/Rise.png"),
-                        Spacer(),
-                        Text("Trends",textAlign: TextAlign.start,
+                        const Spacer(),
+                        Text(AppLocalizations.of(context).translate('trends'),textAlign: TextAlign.start,
                           style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NativeReLocation()),
+                    );
+                  }, // Image tapped
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.translate_rounded,
+                          color: Colors.grey,
+                          size: 30,
+                        ),
+                        const Spacer(),
+                        Text(AppLocalizations.of(context).translate('trans'),textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                        ),
+                        const Spacer(),
                       ],
                     ),
                   ),

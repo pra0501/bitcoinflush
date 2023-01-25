@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Navbar.dart';
+import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
+import 'top_coin.dart';
 
 class TopLoser extends StatefulWidget {
   const TopLoser({Key? key}) : super(key: key);
@@ -20,23 +21,15 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
 
   bool isLoading = false;
   late List<Bitcoin> topLooserAndGainerList = [];
-  late TabController _tabController;
   SharedPreferences? sharedPreferences;
   String? coin;
   String? URL;
 
   @override
   void initState() {
-    callGainerLooserBitcoinApi();
-    // fetchRemoteValue();
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+    fetchRemoteValue();
+    super.initState();
   }
 
 
@@ -51,7 +44,7 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
       ));
       await remoteConfig.fetchAndActivate();
 
-      URL = remoteConfig.getString('loophole_image').trim();
+      URL = remoteConfig.getString('bitFuture_image_url').trim();
 
       setState(() {
 
@@ -99,7 +92,7 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                             ),
                           ),
                           const Spacer(),
-                          Text("Top Coins", style: GoogleFonts.openSans(textStyle: const TextStyle(
+                          Text(AppLocalizations.of(context).translate('top_coin'), style: GoogleFonts.openSans(textStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 25,
                               fontWeight: FontWeight.bold),)
@@ -112,9 +105,9 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                     Container(
                       child: Row(
                         children: [
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(15),
-                            child: Text("Top Loser",textAlign: TextAlign.left,
+                            child: Text(AppLocalizations.of(context).translate('top_lose'),textAlign: TextAlign.left,
                               style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -125,19 +118,22 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => NavBar()),
+                                  MaterialPageRoute(builder: (context) => TopGainer()),
                                 );
                               }, // Image tapped
                               child: Container(
                                 decoration: BoxDecoration(color: Color(0xff2e3546),borderRadius: BorderRadius.circular(20)),
                                 child: Padding(
                                   padding: EdgeInsets.all(15),
-                                  child: Text("Gainer",textAlign: TextAlign.center,
+                                  child: Text(AppLocalizations.of(context).translate('gain'),textAlign: TextAlign.center,
                                     style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),
                                   ),
                                 ),
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            width: 30,
                           ),
                         ],
                       ),
@@ -146,11 +142,9 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                       height: 10,
                     ),
                     Expanded(
-                        child: TabBarView(children: [
-                          topLooser(),
-
-                        ]
-                        )
+                        child: Container(
+                          child: topLooser(),
+                        ),
                     ),
 
                   ],
@@ -196,7 +190,7 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                                     padding: const EdgeInsets.all(2.0),
                                     child: FadeInImage(
                                       placeholder: const AssetImage('assets/image/cob.png'),
-                                      image: NetworkImage("http://45.34.15.25:8080/Bitcoin/resources/icons/${list[i].name!.toLowerCase()}.png"),
+                                      image: NetworkImage("$URL/Bitcoin/resources/icons/${list[i].name!.toLowerCase()}.png"),
                                       // image: NetworkImage("http://45.34.15.25:8080/Bitcoin/resources/icons/${gainerLooserCoinList[i].name.toLowerCase()}.png"),
                                     ),
                                   )
@@ -351,7 +345,7 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       sharedPreferences!.setString("currencyName", name);
-      sharedPreferences!.setString("title", "Trends");
+      sharedPreferences!.setString("title", AppLocalizations.of(context).translate('trends'));
       sharedPreferences!.commit();
     });
 
@@ -361,7 +355,7 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
   Future<void> callGainerLooserBitcoinApi() async {
 
     var uri =
-        'http://45.34.15.25:8080/Bitcoin/resources/getBitcoinListLoser?size=0';
+        '$URL/Bitcoin/resources/getBitcoinListLoser?size=0';
 
     //  print(uri);
     var response = await get(Uri.parse(uri));

@@ -10,6 +10,7 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Navbar.dart';
 import 'dashboard_helper.dart';
+import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
 import 'models/PortfolioBitcoin.dart';
 
@@ -27,7 +28,6 @@ class _CoinsPageState extends State<CoinsPage>
   SharedPreferences? sharedPreferences;
   num _size = 0;
   double totalValuesOfPortfolio = 0.0;
-  final _formKey2 = GlobalKey<FormState>();
   String? URL;
 
   TextEditingController? coinCountTextEditingController;
@@ -38,8 +38,7 @@ class _CoinsPageState extends State<CoinsPage>
 
   @override
   void initState() {
-    // fetchRemoteValue();
-    callBitcoinApi();
+    fetchRemoteValue();
     coinCountTextEditingController = TextEditingController();
     coinCountEditTextEditingController = TextEditingController();
     dbHelper.queryAllRows().then((notes) {
@@ -69,7 +68,7 @@ class _CoinsPageState extends State<CoinsPage>
 
       // await remoteConfig.fetch(expiration: const Duration(seconds: 30));
       // await remoteConfig.activateFetched();
-      URL = remoteConfig.getString('bit_evo_url').trim();
+      URL = remoteConfig.getString('bitFuture_image_url').trim();
 
       print(URL);
       setState(() {
@@ -107,7 +106,7 @@ class _CoinsPageState extends State<CoinsPage>
                   ),
                 ),
                 const Spacer(),
-                Text("Coins", style: GoogleFonts.openSans(textStyle: const TextStyle(
+                Text(AppLocalizations.of(context).translate('coins'), style: GoogleFonts.openSans(textStyle: const TextStyle(
                     color: Colors.white,
                     fontSize: 25,
                     fontWeight: FontWeight.bold),)
@@ -254,8 +253,7 @@ class _CoinsPageState extends State<CoinsPage>
   }
 
   Future<void> callBitcoinApi() async {
-    // var uri = '$URL/Bitcoin/resources/getBitcoinList?size=${_size}';
-    var uri = 'http://45.34.15.25:8080/Bitcoin/resources/getBitcoinList?size=${_size}';
+    var uri = '$URL/Bitcoin/resources/getBitcoinList?size=${_size}';
     //  print(uri);
     var response = await get(Uri.parse(uri));
     //   print(response.body);
@@ -285,7 +283,7 @@ class _CoinsPageState extends State<CoinsPage>
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       sharedPreferences!.setString("currencyName", name);
-      sharedPreferences!.setString("title", "Trends");
+      sharedPreferences!.setString("title", AppLocalizations.of(context).translate('trends'));
       sharedPreferences!.commit();
     });
 

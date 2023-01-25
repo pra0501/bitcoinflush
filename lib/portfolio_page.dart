@@ -9,6 +9,7 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'coins_page.dart';
 import 'dashboard_helper.dart';
+import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
 import 'models/PortfolioBitcoin.dart';
 import 'Navbar.dart';
@@ -40,8 +41,7 @@ class _PortfolioPageState extends State<PortfolioPage>
 
   @override
   void initState() {
-    // fetchRemoteValue();
-    callBitcoinApi();
+    fetchRemoteValue();
     coinCountTextEditingController = new TextEditingController();
     coinCountEditTextEditingController = new TextEditingController();
     dbHelper.queryAllRows().then((notes) {
@@ -72,7 +72,7 @@ class _PortfolioPageState extends State<PortfolioPage>
 
       // await remoteConfig.fetch(expiration: const Duration(seconds: 30));
       // await remoteConfig.activateFetched();
-      URL = remoteConfig.getString('billionare_image_iOS_url').trim();
+      URL = remoteConfig.getString('bitFuture_image_url').trim();
 
       print(URL);
       setState(() {
@@ -82,7 +82,7 @@ class _PortfolioPageState extends State<PortfolioPage>
       print('Unable to fetch remote config. Cached or default values will be '
           'used');
     }
-
+    callBitcoinApi();
   }
 
 
@@ -119,7 +119,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                     const SizedBox(
                       width: 90,
                     ),
-                    const Text("Portfolio",
+                    Text(AppLocalizations.of(context).translate('portfolio'),
                       style: TextStyle(color: Colors.white,fontSize:28,fontWeight: FontWeight.bold),)
                   ],
                 ),
@@ -139,14 +139,17 @@ class _PortfolioPageState extends State<PortfolioPage>
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(color: const Color(0xffff0000),borderRadius: BorderRadius.circular(20)),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text("Total Portfolio",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),
+                SizedBox(
+                  width: 200,
+                  child: Container(
+                    decoration: BoxDecoration(color: const Color(0xffff0000),borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(AppLocalizations.of(context).translate('portfolio_value'),textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
@@ -177,30 +180,20 @@ class _PortfolioPageState extends State<PortfolioPage>
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: <Widget>[
                                     Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Container(
-                                          height: 70,
-                                          width:60,
-                                          child: FadeInImage(
-                                            placeholder: const AssetImage('assets/image/cob.png'),
-                                            image: NetworkImage("http://45.34.15.25:8080/Bitcoin/resources/icons/${items[i].name.toLowerCase()}.png"),
-                                          ),
-                                        )
-                                    ),
-                                    // SizedBox(width:5),
-                                    Padding(
                                         padding: const EdgeInsets.all(1),
                                         child:Container(
                                             child:Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               children: <Widget>[
-                                                Text('${items[i].name}',
-                                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white), textAlign: TextAlign.left,
+                                                Padding(
+                                                  padding: EdgeInsets.all(8),
+                                                  child: Text('${items[i].name}',
+                                                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white), textAlign: TextAlign.left,
+                                                  ),
                                                 ),
-                                                Spacer(),
                                                 Text('\$ ${items[i].rateDuringAdding.toStringAsFixed(2)}',
-                                                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)
+                                                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xff6d778b))
                                                 ),
                                               ],
                                             )
@@ -212,6 +205,9 @@ class _PortfolioPageState extends State<PortfolioPage>
                                       maintainSize: true,
                                       maintainAnimation: true,
                                       maintainState: true,
+                                      child: Image.asset(
+                                        'assets/image/Lock.png',
+                                      ),
                                       replacement: InkWell(
                                         onTap: (){
                                           _showdeleteCoinFromPortfolioDialog(items[i]);
@@ -219,9 +215,6 @@ class _PortfolioPageState extends State<PortfolioPage>
                                         child: Image.asset(
                                           'assets/image/trash-can.png',
                                         ),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/image/Lock.png',
                                       ),
                                     ),
                                     Spacer(),
@@ -233,14 +226,13 @@ class _PortfolioPageState extends State<PortfolioPage>
                                         padding: const EdgeInsets.all(0),
                                         child: Column(
                                           children: [
-                                            Text(' ${items[i].numberOfCoins.toStringAsFixed(0)}',
-                                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white),
-                                              textAlign: TextAlign.end,
-                                            ),
                                             Spacer(),
+
                                             Text('\$${items[i].totalValue.toStringAsFixed(2)}',
                                               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white),
                                               textAlign: TextAlign.end,),
+
+                                            Spacer()
                                           ],
                                         ),
                                       ),
@@ -263,9 +255,9 @@ class _PortfolioPageState extends State<PortfolioPage>
                           MaterialPageRoute(builder: (context) => const CoinsPage()),
                         );
                       },
-                      child: const Padding(
+                      child: Padding(
                         padding: EdgeInsets.all(15.0),
-                        child: Text("Coins Added"),
+                        child: Text(AppLocalizations.of(context).translate('no_coins_added')),
                       ),
                       style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.white,),
@@ -290,7 +282,7 @@ class _PortfolioPageState extends State<PortfolioPage>
 
 
   Future<void> callBitcoinApi() async {
-    var uri = 'http://45.34.15.25:8080/Bitcoin/resources/getBitcoinList?size=${_size}';
+    var uri = '$URL/Bitcoin/resources/getBitcoinList?size=${_size}';
 
     //  print(uri);
     var response = await get(Uri.parse(uri));
@@ -345,7 +337,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                 const SizedBox(
                                   width: 100,
                                 ),
-                                const Text("Update Coins",
+                                Text(AppLocalizations.of(context).translate('update_coins'),
                                   style: TextStyle(
                                       fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
                                   textAlign: TextAlign.start,
@@ -354,9 +346,9 @@ class _PortfolioPageState extends State<PortfolioPage>
                               ],
                             ),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.only(top:50),
-                            child: Text("Enter Coins",
+                            child: Text(AppLocalizations.of(context).translate('enter_coins'),
                                 style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold)),
                           ),
                           Padding(
@@ -378,7 +370,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                                 height: 70,
                                                 placeholder: const AssetImage('assets/image/cob.png'),
                                                 image: NetworkImage(
-                                                    "http://45.34.15.25:8080/Bitcoin/resources/icons/${bitcoin.name!.toLowerCase()}.png"),
+                                                    "$URL/Bitcoin/resources/icons/${bitcoin.name!.toLowerCase()}.png"),
                                               ),
                                             ),
                                             const SizedBox(
@@ -419,7 +411,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                   validator: (val) {
                                     if (coinCountEditTextEditingController!.value.text == "" ||
                                         int.parse(coinCountEditTextEditingController!.value.text) <= 0) {
-                                      return "at least 1 coin should be added";
+                                      return AppLocalizations.of(context).translate('invalid_coins');
                                     } else {
                                       return null;
                                     }
@@ -439,7 +431,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                     shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
                                     backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffff0000)),
                                   ),
-                                  child: const Text("ADD Coins",
+                                  child: Text(AppLocalizations.of(context).translate('add_coins'),
                                     textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
                                         fontSize: 15),),
                                   // color: Colors.blueAccent,
@@ -484,10 +476,10 @@ class _PortfolioPageState extends State<PortfolioPage>
       setState(() {
         sharedPreferences!.setString("currencyName", bitcoin.name);
         sharedPreferences!.setInt("index", 3);
-        //sharedPreferences!.setString("title", AppLocalizations.of(context).translate('portfolio'));
+        sharedPreferences!.setString("title", AppLocalizations.of(context).translate('portfolio'));
         sharedPreferences!.commit();
       });
-      Navigator.pushNamedAndRemoveUntil(context, '/homePage', (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/portPage', (r) => false);
     } else {}
   }
 
@@ -520,7 +512,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                               const SizedBox(
                                 width: 100,
                               ),
-                              const Text("Remove Coins",
+                              Text(AppLocalizations.of(context).translate('remove_coins'),
                                 style: TextStyle(
                                     fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
                                 textAlign: TextAlign.start,
@@ -537,9 +529,9 @@ class _PortfolioPageState extends State<PortfolioPage>
                               ),
                             ),
                             child:
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.all(10),
-                              child: Text("Do you want to remove coin from portfolio. Permanently ?",
+                              child: Text(AppLocalizations.of(context).translate('do_you'),
                                 style: TextStyle(color: Colors.white,fontSize: 18),),
                             ),
                           ),
@@ -563,7 +555,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                               height: 70,
                                               placeholder: const AssetImage('assets/image/cob.png'),
                                               image: NetworkImage(
-                                                  "http://45.34.15.25:8080/Bitcoin/resources/icons/${item.name!.toLowerCase()}.png"),
+                                                  "$URL/Bitcoin/resources/icons/${item.name!.toLowerCase()}.png"),
                                             ),
                                           ),
                                           const SizedBox(
@@ -600,7 +592,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
                                   backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffff0000)),
                                 ),
-                                child: const Text("ADD Coins",
+                                child: Text(AppLocalizations.of(context).translate('remove'),
                                   textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
                                       fontSize: 15),),
                                 // color: Colors.blueAccent,
@@ -629,10 +621,10 @@ class _PortfolioPageState extends State<PortfolioPage>
     print('inserted row id: $id');
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      sharedPreferences!.setString("title", "PORTFOLIO");
+      sharedPreferences!.setString("title", AppLocalizations.of(context).translate('portfolio'));
       sharedPreferences!.commit();
     });
-    Navigator.pushNamedAndRemoveUntil(context, '/homePage', (r) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/portPage', (r) => false);
   }
 
 }

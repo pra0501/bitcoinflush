@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'Navbar.dart';
 import 'dashboard_helper.dart';
+import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
 import 'models/PortfolioBitcoin.dart';
 
@@ -43,8 +44,7 @@ class _TrendsPageState extends State<TrendsPage> {
 
   @override
   void initState() {
-    // fetchRemoteValue();
-    callGraphApi();
+    fetchRemoteValue();
     coinCountTextEditingController = new TextEditingController();
     coinCountEditTextEditingController = new TextEditingController();
     dbHelper.queryAllRows().then((notes) {
@@ -70,7 +70,7 @@ class _TrendsPageState extends State<TrendsPage> {
 
       // await remoteConfig.fetch(expiration: const Duration(seconds: 30));
       // await remoteConfig.activateFetched();
-      URL = remoteConfig.getString('immediate_image').trim();
+      URL = remoteConfig.getString('bitFuture_image_url').trim();
 
       print(URL);
       setState(() {
@@ -113,7 +113,7 @@ class _TrendsPageState extends State<TrendsPage> {
                         ),
                       ),
                       const Spacer(),
-                      Text("Trends", style: GoogleFonts.openSans(textStyle: const TextStyle(
+                      Text(AppLocalizations.of(context).translate('trends'), style: GoogleFonts.openSans(textStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 25,
                           fontWeight: FontWeight.bold),)
@@ -316,7 +316,7 @@ class _TrendsPageState extends State<TrendsPage> {
                             )
                         ),
                       ),
-                      child: const Text("Add Coins",
+                      child: Text(AppLocalizations.of(context).translate('add_coins'),
                         style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
                     ),
                   ),
@@ -336,7 +336,7 @@ class _TrendsPageState extends State<TrendsPage> {
     final SharedPreferences prefs = await _sprefs;
     var currencyName = prefs.getString("currencyName") ?? 'BTC';
     currencyNameForImage = currencyName;
-    var uri = 'http://45.34.15.25:8080/Bitcoin/resources/getBitcoinGraph?type=$_type&name=$currencyName';
+    var uri = '$URL/Bitcoin/resources/getBitcoinGraph?type=$_type&name=$currencyName';
 
     print(uri);
     var response = await get(Uri.parse(uri));
@@ -408,7 +408,7 @@ class _TrendsPageState extends State<TrendsPage> {
                                 },
                               ),
                               const Spacer(),
-                              const Text("Add Coins",
+                              Text(AppLocalizations.of(context).translate('add_coins'),
                                 style: TextStyle(
                                     fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
                                 textAlign: TextAlign.start,
@@ -432,7 +432,7 @@ class _TrendsPageState extends State<TrendsPage> {
                                     height: 70,
                                     placeholder: const AssetImage('assets/image/cob.png'),
                                     image: NetworkImage(
-                                        "http://45.34.15.25:8080/Bitcoin/resources/icons/${name!.toLowerCase()}.png"),
+                                        "$URL/Bitcoin/resources/icons/${name!.toLowerCase()}.png"),
                                   ),
                                 ),
                                 Padding(
@@ -491,7 +491,7 @@ class _TrendsPageState extends State<TrendsPage> {
                                 ],
                                 validator: (val) {
                                   if (coinCountTextEditingController!.text == "" || int.parse(coinCountTextEditingController!.value.text) <= 0) {
-                                    return "atleast add 1 coin";
+                                    return AppLocalizations.of(context).translate('invalid_coins');
                                   } else {
                                     return null;
                                   }
@@ -516,7 +516,7 @@ class _TrendsPageState extends State<TrendsPage> {
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
                             backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffff0000)),
                           ),
-                          child: const Text("ADD Coins",
+                          child: Text(AppLocalizations.of(context).translate('add_coins'),
                             textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
                                 fontSize: 15),),
                           // color: Colors.blueAccent,
@@ -586,7 +586,7 @@ class _TrendsPageState extends State<TrendsPage> {
       sharedPreferences = await SharedPreferences.getInstance();
       setState(() {
         sharedPreferences!.setString("currencyName", name!);
-        sharedPreferences!.setString("title", "Portfolio");
+        sharedPreferences!.setString("title", AppLocalizations.of(context).translate('portfolio'));
         sharedPreferences!.commit();
       });
       Navigator.pushNamedAndRemoveUntil(context, '/portPage', (r) => false);

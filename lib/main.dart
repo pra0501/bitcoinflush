@@ -1,39 +1,73 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import "package:flutter_localizations/flutter_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'localization/AppLanguage.dart';
+import 'localization/app_localization.dart';
 import 'portfolio_page.dart';
 import 'trendsPage.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  AppLanguage appLanguage = AppLanguage();
+  await appLanguage.fetchLocale();
+  runApp(MyApp(
+    appLanguage: appLanguage,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  final AppLanguage? appLanguage;
+  MyApp({this.appLanguage});
+
   // final FirebaseAnalytics analytics = FirebaseAnalytics();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorObservers: [
-        //FirebaseAnalyticsObserver(analytics: analytics)
-      ],
-      title: 'Bitcoin',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.openSansTextTheme(),
+    return ChangeNotifierProvider<AppLanguage>(
+      create: (_) => appLanguage!,
+      child: Consumer<AppLanguage>(
+        builder: (context, model, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            navigatorObservers: const [
+              // FirebaseAnalyticsObserver(analytics: analytics)
+            ],
+            title: 'Bitcoin',
+            theme: ThemeData(
+              textTheme: GoogleFonts.openSansTextTheme(),
+            ),
+            locale: model.appLocal,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', 'US'),
+              Locale('ar', ''),
+              Locale('de', ''),
+              Locale('es', ''),
+              Locale('fi', ''),
+              Locale('fr', ''),
+              Locale('it', ''),
+              Locale('nl', ''),
+              Locale('nb', ''),
+              Locale('pt', ''),
+              Locale('ru', ''),
+              Locale('sv', '')
+            ],
+            routes: <String, WidgetBuilder>{
+              '/myHomePage': (BuildContext context) => MyHomePage(),
+              '/homePage': (BuildContext context) => TrendsPage(),
+              '/portPage': (BuildContext context) => PortfolioPage(),
+              '/trendPage': (BuildContext context) => TrendsPage(),
+
+            },
+            home: MyHomePage(),
+          );
+        },
       ),
-      routes: <String, WidgetBuilder>{
-        '/myHomePage': (BuildContext context) => MyHomePage(),
-        '/homePage': (BuildContext context) => TrendsPage(),
-        '/portPage': (BuildContext context) => PortfolioPage(),
-        '/trendPage': (BuildContext context) => TrendsPage(),
-      },
-      home: MyHomePage(),
     );
   }
 }
@@ -60,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
               fit: BoxFit.fitHeight,
               height: MediaQuery.of(context).size.height,
             ),
-
           ],
         ));
   }
@@ -69,13 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     homePage();
     super.initState();
-
   }
 
-
-
   Future<void> homePage() async {
-    Future.delayed(Duration(milliseconds: 1000)).then((_) {
+    Future.delayed(const Duration(milliseconds: 1000)).then((_) {
       Navigator.of(context).pushReplacementNamed('/homePage');
     });
   }
