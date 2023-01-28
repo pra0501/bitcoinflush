@@ -30,6 +30,7 @@ class _PortfolioPageState extends State<PortfolioPage>
   double totalValuesOfPortfolio = 0.0;
   final _formKey = GlobalKey<FormState>();
   bool _isShow = true;
+  String? image;
   String? URL;
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -172,7 +173,7 @@ class _PortfolioPageState extends State<PortfolioPage>
                                 onTap: () {
                                   setState(
                                         () {
-                                      _isShow = !_isShow;
+                                      image = "true";
                                     },
                                   );
                                 },
